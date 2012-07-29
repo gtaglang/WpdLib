@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+	<sys:String x:Key="Strings.Common.AppName" xml:space="preserve">WpdLib サンプル</sys:String>
+	<sys:String x:Key="Strings.Common.Info" xml:space="preserve">情報</sys:String>
+	<sys:String x:Key="Strings.Button.Scan" xml:space="preserve">デバイス読み込み</sys:String>
+	<sys:String x:Key="Strings.Message.DeviceNotFound" xml:space="preserve">PC に接続されているデバイスは見つかりませんでした。</sys:String>
+
+</ResourceDictionary>

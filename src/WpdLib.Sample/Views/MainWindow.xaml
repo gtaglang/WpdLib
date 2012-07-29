@@ -1,0 +1,70 @@
+﻿<Window x:Class="WpdLib.Sample.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:v="clr-namespace:WpdLib.Sample.Views"
+        xmlns:vm="clr-namespace:WpdLib.Sample.ViewModels"
+        Title="{StaticResource Strings.Common.AppName}"
+        Width="800"
+        Height="480"
+        WindowStartupLocation="CenterScreen">
+
+	<Window.DataContext>
+		<vm:MainWindowViewModel />
+	</Window.DataContext>
+
+	<i:Interaction.Triggers>
+		<!--  WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます  -->
+		<i:EventTrigger EventName="ContentRendered">
+			<l:LivetCallMethodAction MethodName="Initialize" MethodTarget="{Binding}" />
+		</i:EventTrigger>
+
+		<!--  Windowが閉じたタイミングでViewModelのDisposeメソッドが呼ばれます  -->
+		<i:EventTrigger EventName="Closed">
+			<l:DataContextDisposeAction />
+		</i:EventTrigger>
+
+		<!--  WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください  -->
+
+	</i:Interaction.Triggers>
+
+	<Grid Background="#BBCCFF">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<!--  デバイス選択  -->
+		<StackPanel Grid.Row="0"
+		            Margin="4"
+		            Orientation="Horizontal">
+			<Button Content="{StaticResource Strings.Button.Scan}">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="Click">
+						<l:LivetCallMethodAction MethodName="EnumDevice" MethodTarget="{Binding}" />
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</Button>
+			<ComboBox x:Name="SelectDevice"
+			          Width="256"
+			          Margin="8,0,0,0"
+			          VerticalAlignment="Center"
+			          ItemsSource="{Binding Devices}"
+			          SelectedValue="">
+				<ComboBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding DisplayName}" />
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>
+		</StackPanel>
+
+		<!--  デバイス情報  -->
+		<v:PortableDeviceView Grid.Row="1"
+		                      Margin="4"
+		                      DataContext="{Binding SelectedValue,
+		                                            ElementName=SelectDevice}" />
+	</Grid>
+</Window>
