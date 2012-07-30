@@ -29,7 +29,7 @@ namespace WpdLib
 		/// <summary>
 		/// 子オブジェクトを列挙します。
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>列挙された子オブジェクトのコレクション。</returns>
 		public IEnumerable< WpdObject > EnumChildren()
 		{
 			IPortableDeviceProperties properties;
@@ -57,7 +57,6 @@ namespace WpdLib
 		/// <summary>
 		/// 最新のプロパティ情報を列挙します。
 		/// </summary>
-		/// <param name="isUpdate">列挙したプロパティの内容を現在のインスタンスに反映するなら true。しない場合は false。</param>
 		public void UpdateValues()
 		{
 			foreach( var value in WpdPropertyValue.EnumValues( this.Id, this._properties ) )

@@ -151,7 +151,6 @@ namespace WpdLib
 		/// <summary>
 		/// 最新のプロパティ情報を列挙します。
 		/// </summary>
-		/// <param name="isUpdate">列挙したプロパティの内容を現在のインスタンスに反映するなら true。しない場合は false。</param>
 		private void UpdateValues()
 		{
 			IPortableDeviceContent content;
